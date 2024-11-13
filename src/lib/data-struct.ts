@@ -20,13 +20,14 @@ export type Repo = {
     languages_url: string;
 };
 
-export type Profile = {
+export type Account = {
     id: number;
     login: string;
     avatar_url: string;
     html_url: string;
     blog: string;
     location: string;
+    followers: number;
 };
 
 export enum AccountType {

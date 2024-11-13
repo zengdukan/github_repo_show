@@ -1,6 +1,6 @@
 import { type NextRequest } from 'next/server';
-import { Repos } from '@/lib/mock_data';
-import { AccountType } from '@/lib/data_struct';
+import { Repos } from '@/lib/mock-data';
+import { AccountType } from '@/lib/data-struct';
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;

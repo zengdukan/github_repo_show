@@ -3497,7 +3497,7 @@ export const Repos = `
 ]
 `;
 
-export const Profile = `
+export const Account = `
 {
     "login": "spring-projects",
     "id": 317776,

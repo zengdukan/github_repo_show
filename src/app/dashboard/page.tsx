@@ -14,17 +14,18 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Repo } from "@/lib/data_struct";
-import { Repos } from "@/lib/mock_data";
+import { Account, Repo } from "@/lib/data-struct";
+import { Repos, Account as MockAccount } from "@/lib/mock-data";
 import { useState } from "react";
 
 export default function Page() {
   const repos = JSON.parse(Repos) as Repo[];
+  const account = JSON.parse(MockAccount) as Account;
   const [activeRepoId, setActiveRepoId] = useState<number | undefined>(repos.length > 0 ? repos[0].id : undefined);
 
   return (
     <SidebarProvider>
-      <AppSidebar repos={repos} activeRepoId={activeRepoId} setActiveRepoId={setActiveRepoId} />
+      <AppSidebar repos={repos} activeRepoId={activeRepoId} setActiveRepoId={setActiveRepoId} account={account} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
