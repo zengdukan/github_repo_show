@@ -18,6 +18,7 @@ export type Repo = {
     homepage: string;
     html_url: string;
     languages_url: string;
+    contributors_url: string;
 };
 
 export type Account = {

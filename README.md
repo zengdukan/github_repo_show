@@ -371,9 +371,72 @@ response:
 ```
 
 ### get repo profile
+- id
 - name + link
+- description
 - watch, fork, star count (chart)
-- About, tag, license
+- topics
+- license
 - Languages (chart)
+- ~~issues open/closed count~~
+- ~~pull requests open/close count~~
 - Contributors and commit (chart + list)
-- issues totol/open
+- ~~commit chart~~ 
+
+#### List repository contributors
+url: `https://api.github.com/repos/OWNER/REPO/contributor`
+
+```
+req: https://api.github.com/repos/spring-projects/spring-boot/contributors
+rsp:
+[
+    {
+        "login": "wilkinsona",
+        "id": 914682,
+        "node_id": "MDQ6VXNlcjkxNDY4Mg==",
+        "avatar_url": "https://avatars.githubusercontent.com/u/914682?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/wilkinsona",
+        "html_url": "https://github.com/wilkinsona",
+        "followers_url": "https://api.github.com/users/wilkinsona/followers",
+        "following_url": "https://api.github.com/users/wilkinsona/following{/other_user}",
+        "gists_url": "https://api.github.com/users/wilkinsona/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/wilkinsona/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/wilkinsona/subscriptions",
+        "organizations_url": "https://api.github.com/users/wilkinsona/orgs",
+        "repos_url": "https://api.github.com/users/wilkinsona/repos",
+        "events_url": "https://api.github.com/users/wilkinsona/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/wilkinsona/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false,
+        "contributions": 18045
+    }
+]
+
+```
+
+#### List repository languages
+url: `https://api.github.com/repos/OWNER/REPO/languages`
+
+```
+req:https://api.github.com/repos/spring-projects/spring-boot/languages
+
+rsp:
+{
+    "Java": 26641542,
+    "Kotlin": 449533,
+    "HTML": 58440,
+    "JavaScript": 33592,
+    "Shell": 29155,
+    "Groovy": 15221,
+    "Ruby": 8298,
+    "Smarty": 2882,
+    "Batchfile": 1955,
+    "Dockerfile": 1278,
+    "Mustache": 449,
+    "Vim Snippet": 135,
+    "CSS": 117
+}
+
+```
