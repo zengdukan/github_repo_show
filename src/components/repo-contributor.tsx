@@ -4,7 +4,7 @@ type Props = {
   repo?: Repo;
 }
 
-export function ProjectContributor(props: Props) {
+export function RepoContributor(props: Props) {
 
   return (
     <div></div>

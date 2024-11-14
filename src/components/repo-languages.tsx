@@ -4,7 +4,7 @@ type Props = {
   repo?: Repo;
 }
 
-export function ProjectLanguages(props: Props) {
+export function RepoLanguages(props: Props) {
 
   return (
     <div></div>

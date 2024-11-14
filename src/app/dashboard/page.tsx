@@ -1,8 +1,8 @@
 'use client';
 import { AppSidebar } from "@/components/app-sidebar";
-import { ProjectContributor } from "@/components/project-contributor";
-import { ProjectInfo } from "@/components/project-info";
-import { ProjectLanguages } from "@/components/project-languages";
+import { RepoContributor } from "@/components/repo-contributor";
+import { RepoInfo } from "@/components/repo-info";
+import { RepoLanguages } from "@/components/repo-languages";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -42,17 +42,15 @@ export default function Page() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbPage>{findRepoById?.name}</BreadcrumbPage>
+                <BreadcrumbPage>{activeRepo?.name}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
+          <RepoInfo repo={activeRepo} />
           <div className="min-h-[100vh] rounded-xl bg-muted/50 md:min-h-min">
-            <ProjectInfo repo={activeRepo}/>
-          </div>
-          <div className="min-h-[100vh] rounded-xl bg-muted/50 md:min-h-min">
-            <ProjectLanguages repo={activeRepo}/>
+            <RepoLanguages repo={activeRepo}/>
           </div>
           {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="aspect-video rounded-xl bg-muted/50" />
@@ -60,7 +58,7 @@ export default function Page() {
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div> */}
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-            <ProjectContributor repo={activeRepo} />
+            <RepoContributor repo={activeRepo} />
           </div>
         </div>
       </SidebarInset>

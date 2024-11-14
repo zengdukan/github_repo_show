@@ -4,7 +4,7 @@ type Props = {
   repo?: Repo;
 }
 
-export function ProjectTopics(props: Props) {
+export function RepoCount(props: Props) {
   return (
     <div></div>
   );
