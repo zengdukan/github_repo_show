@@ -3530,4 +3530,22 @@ export const Account = `
     "archived_at": null,
     "type": "Organization"
 }
-`
+`;
+
+export const RepoLanguage = `
+  {
+    "Java": 26644744,
+    "Kotlin": 449533,
+    "HTML": 58440,
+    "JavaScript": 33592,
+    "Shell": 29155,
+    "Groovy": 15221,
+    "Ruby": 8298,
+    "Smarty": 2882,
+    "Batchfile": 1955,
+    "Dockerfile": 1278,
+    "Mustache": 449,
+    "Vim Snippet": 135,
+    "CSS": 117
+}
+`;
