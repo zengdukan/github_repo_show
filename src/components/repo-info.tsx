@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ExternalLinkIcon } from 'lucide-react';
+import { ExternalLinkIcon, ScaleIcon } from 'lucide-react';
 
 type Props = {
   repo?: Repo;
@@ -35,23 +35,23 @@ export function RepoInfo(props: Props) {
               </a>
             </Button>
           </span>
-          <div>
+          <div className="hidden md:block">
             {
-              repo.topics.map((item => (
-                <code className="relative rounded-full bg-sky-100 px-[0.3rem] py-[0.2rem] font-thin text-sm m-1 text-muted-foreground" style={{fontSize: 12}}>
+              repo.topics.map((item) => (
+                <code key={item} className="relative rounded-full bg-sky-100 px-[0.3rem] py-[0.2rem] font-thin text-sm m-1 text-muted-foreground" style={{ fontSize: 12 }}>
                   {item}
                 </code>
-              )))
+              ))
             }
           </div>
         </CardTitle>
         <CardDescription>{repo.description}</CardDescription>
       </CardHeader>
-      <CardContent>
-        <p>Card Content</p>
-      </CardContent>
       <CardFooter>
-        <p>Card Footer</p>
+        <div className="flex items-center">
+          <ScaleIcon className="mr-2 h-4 w-4 opacity-70"/>
+          <span className="h-4 text-sm text-muted-foreground">{repo.license.name}</span>
+        </div>
       </CardFooter>
     </Card>
 
