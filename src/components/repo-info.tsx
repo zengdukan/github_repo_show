@@ -50,7 +50,7 @@ export function RepoInfo(props: Props) {
       <CardFooter>
         <div className="flex items-center">
           <ScaleIcon className="mr-2 h-4 w-4 opacity-70"/>
-          <span className="h-4 text-sm text-muted-foreground">{repo.license.name}</span>
+          <span className="h-4 text-sm text-muted-foreground">{repo.license?.name}</span>
         </div>
       </CardFooter>
     </Card>

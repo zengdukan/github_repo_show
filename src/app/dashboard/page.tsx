@@ -51,9 +51,7 @@ export default function Page() {
         <div className="flex flex-1 flex-col gap-4 p-4">
           <RepoInfo repo={activeRepo} />
           <RepoCount repo={activeRepo} />
-          <div className="min-h-[100vh] rounded-xl bg-muted/50 md:min-h-min">
-            <RepoLanguages repo={activeRepo} />
-          </div>
+          <RepoLanguages repo={activeRepo} />
           
           <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
             <RepoContributor repo={activeRepo} />
