@@ -35,3 +35,10 @@ export enum AccountType {
     USERS = 'users',
     ORGS = 'orgs',
 };
+
+export type Contributor = {
+    id: number;
+    avatar_url: string;
+    login: string;
+    contributions: number;
+};
