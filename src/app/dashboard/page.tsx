@@ -12,6 +12,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -21,7 +22,8 @@ import {
 import { Account, Repo } from "@/lib/data-struct";
 import { Repos, Account as MockAccount } from "@/lib/mock-data";
 import React, { useMemo, useState } from "react";
-
+import Link from 'next/link';
+import { Ghost, LogOutIcon } from 'lucide-react';
 
 function findRepoById(repos: Repo[], id: number | undefined) {
   return repos.find((item) => item.id === id);
@@ -47,6 +49,11 @@ export default function Page() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <div className="ml-auto px-3">
+            <Button asChild variant="ghost" size="icon">
+              <Link href="/"><LogOutIcon /></Link>
+            </Button>
+          </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <RepoInfo repo={activeRepo} />
