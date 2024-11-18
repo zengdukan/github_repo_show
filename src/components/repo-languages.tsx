@@ -41,8 +41,6 @@ export function RepoLanguages(props: Props) {
     item.fill = `var(--color-${item.language.toLowerCase()})`;
   });
 
-  console.log(firstFive, chartConfig);
-
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -51,7 +49,7 @@ export function RepoLanguages(props: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground">
+        <ChartContainer config={chartConfig} className="mx-auto max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground">
           <BarChart
             accessibilityLayer
             data={firstFive}
@@ -62,14 +60,11 @@ export function RepoLanguages(props: Props) {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) =>
-                chartConfig[value as keyof typeof chartConfig]?.label as string
-              }
             />
-            <YAxis dataKey="size" type="number" hide />
+            <YAxis dataKey="size" type="number" tickLine={false} axisLine={false} />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent  />}
             />
             <Bar dataKey="size" radius={5} />
           </BarChart>

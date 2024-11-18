@@ -1,6 +1,6 @@
 'use client';
 import { AppSidebar } from "@/components/app-sidebar";
-import { RepoContributor } from "@/components/repo-contributor";
+import { RepoContributors } from "@/components/repo-contributors";
 import { RepoCount } from "@/components/repo-count";
 import { RepoInfo } from "@/components/repo-info";
 import { RepoLanguages } from "@/components/repo-languages";
@@ -52,10 +52,7 @@ export default function Page() {
           <RepoInfo repo={activeRepo} />
           <RepoCount repo={activeRepo} />
           <RepoLanguages repo={activeRepo} />
-          
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-            <RepoContributor repo={activeRepo} />
-          </div>
+          <RepoContributors repo={activeRepo} />
         </div>
       </SidebarInset>
     </SidebarProvider>
