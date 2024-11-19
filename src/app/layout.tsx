@@ -30,13 +30,14 @@ export default function RootLayout({
 }>) {
   const [account, setAccount] = useState<Account>();
   const [repos, setRepos] = useState<Repo[]>([]);
+  const [mock, setMock] = useState(false);
 
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <GitContext.Provider value={{account, setAccount, repos, setRepos}}>
+        <GitContext.Provider value={{account, setAccount, repos, setRepos, mock, setMock}}>
           {children}
         </GitContext.Provider>
         <Toaster />

@@ -31,7 +31,7 @@ function findRepoById(repos: Repo[], id: number | undefined) {
 }
 
 export default function Page() {
-  const {account, repos} = useContext(GitContext) as {account: Account; repos: Repo[]} ;
+  const {account, repos, mock} = useContext(GitContext) as {account: Account; repos: Repo[], mock: boolean} ;
   const [activeRepoId, setActiveRepoId] = useState<number | undefined>(repos.length > 0 ? repos[0].id : undefined);
   const activeRepo = useMemo(() => findRepoById(repos, activeRepoId), [activeRepoId, repos]);
 
@@ -58,8 +58,8 @@ export default function Page() {
         <div className="flex flex-1 flex-col gap-4 p-4">
           <RepoInfo repo={activeRepo} />
           <RepoCount repo={activeRepo} />
-          <RepoLanguages repo={activeRepo} />
-          <RepoContributors repo={activeRepo} />
+          <RepoLanguages repo={activeRepo} mock={mock ? '1' : '0'} />
+          <RepoContributors repo={activeRepo}  mock={mock ? '1' : '0'} />
         </div>
       </SidebarInset>
     </SidebarProvider>

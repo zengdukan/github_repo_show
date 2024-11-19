@@ -7,10 +7,13 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Skeleton } from "@/components/ui/skeleton"
 import { RepoLanguage as MockRepoLanguages } from '@/lib/mock-data';
+import useSWR from 'swr';
 
 type Props = {
   repo?: Repo;
+  mock: string;
 }
 
 type RepoLanguageObj = {
@@ -19,9 +22,34 @@ type RepoLanguageObj = {
   fill: string;
 }
 
+const fetcher = url => fetch(url).then(r => r.json())
+
 export function RepoLanguages(props: Props) {
-  const { repo } = props;
-  const RepoLanguages = JSON.parse(MockRepoLanguages) as { [key:string]: number};
+  const { repo, mock } = props;
+  const { data, error, isLoading } = useSWR(`/api/languages?mock=${mock}&url=${repo?.languages_url}`, fetcher);
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardTitle>
+            Languages
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col space-y-3 items-center">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const RepoLanguages = error ? {} : (data ?? {}) as { [key:string]: number};
   const langObjArray: RepoLanguageObj[] = [];
   Object.keys(RepoLanguages).forEach(key => {
     langObjArray.push({language: key.toLowerCase(), size: RepoLanguages[key], fill: ''});

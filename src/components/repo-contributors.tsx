@@ -59,10 +59,11 @@ export function RecentSales({ contributors }: { contributors: Contributor[] }) {
 
 type Props = {
   repo?: Repo;
+  mock: string;
 }
 
 export function RepoContributors(props: Props) {
-  const { repo } = props;
+  const { repo, mock } = props;
   const contributors: Contributor[] = JSON.parse(MockContributors);
   const top10 = contributors.slice(0, 10);
 

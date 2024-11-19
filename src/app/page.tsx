@@ -28,7 +28,7 @@ export default function Home() {
   const { toast } = useToast();
 
   const [loading, setLoading] = React.useState(false);
-  const {setAccount, setRepos} = React.useContext(GitContext);
+  const {setAccount, setRepos, setMock: setMockOfContext} = React.useContext(GitContext);
 
   const handleGoClick = async () => {
     if (accountName.trim().length === 0) {
@@ -64,6 +64,7 @@ export default function Home() {
 
       setAccount(accountJson);
       setRepos(reposJson);
+      setMockOfContext(mock);
       router.push('/dashboard');
     } catch (error) {
       toast({
