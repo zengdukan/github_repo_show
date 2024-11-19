@@ -2,7 +2,8 @@ import { Contributor, Repo } from "@/lib/data-struct";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Contributors as MockContributors } from "@/lib/mock-data";
+import { Skeleton } from "@/components/ui/skeleton"
+import useSWR from 'swr';
 
 export function Overview({ contributors }: { contributors: Contributor[] }) {
 
@@ -28,6 +29,7 @@ export function Overview({ contributors }: { contributors: Contributor[] }) {
           fill="currentColor"
           radius={[4, 4, 0, 0]}
           className="fill-primary"
+          maxBarSize={50}
         />
       </BarChart>
     </ResponsiveContainer>
@@ -62,9 +64,25 @@ type Props = {
   mock: string;
 }
 
+const fetcher = url => fetch(url).then(r => r.json())
+
 export function RepoContributors(props: Props) {
   const { repo, mock } = props;
-  const contributors: Contributor[] = JSON.parse(MockContributors);
+  const { data, error, isLoading } = useSWR(`/api/contributors?mock=${mock}&url=${repo?.contributors_url}`, fetcher);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center">
+        <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
+    );
+  }
+
+  const contributors: Contributor[] = error ? [] : (data ?? []);
   const top10 = contributors.slice(0, 10);
 
   return (

@@ -8,7 +8,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton"
-import { RepoLanguage as MockRepoLanguages } from '@/lib/mock-data';
 import useSWR from 'swr';
 
 type Props = {
@@ -81,6 +80,7 @@ export function RepoLanguages(props: Props) {
           <BarChart
             accessibilityLayer
             data={firstFive}
+            maxBarSize={50}
           >
             <XAxis
               dataKey="language"
