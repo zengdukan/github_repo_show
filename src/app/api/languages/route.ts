@@ -7,10 +7,10 @@ export async function GET(request: NextRequest) {
     const mock = searchParams.get('mock') ?? '0';
 
     if (mock === '1') {
-        return Response.json({ data: JSON.parse(RepoLanguage) });
+        return Response.json(JSON.parse(RepoLanguage));
     } else {
         const res = await fetch(url);
         const data = await res.json();
-        return Response.json({ data });
+        return Response.json(data);
     }
 }

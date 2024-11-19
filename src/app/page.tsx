@@ -14,18 +14,65 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Building2Icon, UserIcon } from 'lucide-react';
-import { AccountType } from "@/lib/data-struct"
+import { Building2Icon, UserIcon, Loader2Icon } from 'lucide-react';
+import { Account, AccountType, Repo } from "@/lib/data-struct"
 import { useRouter } from 'next/navigation';
+import { useToast } from "@/hooks/use-toast";
+import { GitContext } from "@/lib/context"
 
 export default function Home() {
   const [ownerType, setOwnerType] = React.useState(AccountType.ORGS);
-  const [account, setAccount] = React.useState('');
+  const [accountName, setAccountName] = React.useState('');
   const [mock, setMock] = React.useState(true);
   const router = useRouter();
+  const { toast } = useToast();
 
-  const handleGoClick = () => {
-    router.push('/dashboard'); // 跳转到 /about 页面
+  const [loading, setLoading] = React.useState(false);
+  const {setAccount, setRepos} = React.useContext(GitContext);
+
+  const handleGoClick = async () => {
+    if (accountName.trim().length === 0) {
+      console.log('empty');
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: 'Github owner name is required!',
+      })
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const params = {
+        account_type: ownerType,
+        account: accountName,
+        mock: mock ? '1' : '0',
+      };
+      const param = new URLSearchParams(params).toString();
+      const [accountRsp, reposRsp] = await Promise.all([
+        fetch(`/api/account?${param}`),
+        fetch(`/api/repos?${param}`)
+      ]);
+
+      if (!accountRsp.ok || !reposRsp.ok) {
+        throw new Error('One or both network responses were not ok');
+      }
+
+      const accountJson = await accountRsp.json();
+      const reposJson = await reposRsp.json();
+
+      setAccount(accountJson);
+      setRepos(reposJson);
+      router.push('/dashboard');
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message || 'There was a problem with one or both fetch operations.',
+      })
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,7 +87,7 @@ export default function Home() {
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="type">Github owner type</Label>
-                <RadioGroup defaultValue={AccountType.ORGS} className="grid grid-cols-2 gap-4" value={ownerType} onValueChange={(value) => {console.log(value); setOwnerType(value as AccountType);}}>
+                <RadioGroup defaultValue={AccountType.ORGS} className="grid grid-cols-2 gap-4" value={ownerType} onValueChange={(value) => { console.log(value); setOwnerType(value as AccountType); }}>
                   <div>
                     <RadioGroupItem
                       value={AccountType.ORGS}
@@ -69,17 +116,21 @@ export default function Home() {
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="account">Github owner (like: spring-projects, shadcn-ui)</Label>
-                <Input id="account" placeholder="Name of owner" value={account} onChange={(e) => setAccount(e.target.value)}/>
+                <Input id="account" placeholder="Name of owner" value={accountName} onChange={(e) => setAccountName(e.target.value)} />
               </div>
               <div className="flex items-center space-y-1.5">
                 <Label htmlFor="mock" className="mr-1.5">Mock:</Label>
-                <Checkbox id="mock" className="mr-1.5" defaultChecked checked={mock} onCheckedChange={(value) => setMock(value)}/>
+                <Checkbox id="mock" className="mr-1.5" defaultChecked checked={mock} onCheckedChange={(value) => setMock(value)} />
               </div>
             </div>
           </form>
         </CardContent>
         <CardFooter className="flex flex-col">
-          <Button className="w-full" onClick={() => handleGoClick()}>Go</Button>
+          {loading ? 
+            (<Button disabled>
+              <Loader2Icon className="animate-spin" />
+              Please wait
+             </Button>) : (<Button className="w-full" onClick={() => handleGoClick() }>Go</Button>)}
         </CardFooter>
       </Card>
     </div>

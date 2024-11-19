@@ -21,17 +21,17 @@ import {
 } from "@/components/ui/sidebar";
 import { Account, Repo } from "@/lib/data-struct";
 import { Repos, Account as MockAccount } from "@/lib/mock-data";
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import Link from 'next/link';
 import { Ghost, LogOutIcon } from 'lucide-react';
+import { GitContext } from "@/lib/context";
 
 function findRepoById(repos: Repo[], id: number | undefined) {
   return repos.find((item) => item.id === id);
 }
 
 export default function Page() {
-  const repos = JSON.parse(Repos) as Repo[];
-  const account = JSON.parse(MockAccount) as Account;
+  const {account, repos} = useContext(GitContext) as {account: Account; repos: Repo[]} ;
   const [activeRepoId, setActiveRepoId] = useState<number | undefined>(repos.length > 0 ? repos[0].id : undefined);
   const activeRepo = useMemo(() => findRepoById(repos, activeRepoId), [activeRepoId, repos]);
 
