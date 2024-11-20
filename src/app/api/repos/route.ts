@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
         return Response.json(JSON.parse(Repos));
     } else {
         const url = `https://api.github.com/${account_type}/${account}/repos`;
+        console.log(url);
         const res = await fetch(url);
-        return res;
+        const data = await res.json();
+        return Response.json(data, {status: res.status, statusText: res.statusText});
     }
 }

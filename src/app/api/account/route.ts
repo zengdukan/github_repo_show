@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     } else {
         const url = `https://api.github.com/${account_type}/${account}`;
         const res = await fetch(url);
-        return res;
+        const data = await res.json();
+        return Response.json(data, {status: res.status, statusText: res.statusText});
     }
 }
