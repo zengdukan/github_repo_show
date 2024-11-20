@@ -10,7 +10,6 @@ export async function GET(request: NextRequest) {
         return Response.json(JSON.parse(RepoLanguage));
     } else {
         const res = await fetch(url);
-        const data = await res.json();
-        return Response.json(data);
+        return res;
     }
 }

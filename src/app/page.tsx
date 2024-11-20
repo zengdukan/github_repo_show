@@ -56,7 +56,7 @@ export default function Home() {
       ]);
 
       if (!accountRsp.ok || !reposRsp.ok) {
-        throw new Error('One or both network responses were not ok');
+        throw new Error('Request error, please check input and try again.');
       }
 
       const accountJson = await accountRsp.json();
@@ -68,6 +68,7 @@ export default function Home() {
       router.push('/dashboard');
     } catch (error) {
       toast({
+        variant: "destructive",
         title: "Error",
         description: error.message || 'There was a problem with one or both fetch operations.',
       })

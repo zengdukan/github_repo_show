@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
     } else {
         const url = `https://api.github.com/${account_type}/${account}/repos`;
         const res = await fetch(url);
-        const data = await res.json();
-        return Response.json(data);
+        return res;
     }
 }
