@@ -34,6 +34,10 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <title>Github repository showcase</title>
+        <meta name="description" content="show github org/user repository" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
