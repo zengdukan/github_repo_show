@@ -1,3 +1,4 @@
+'use client';
 import * as React from "react";
 
 import { SearchForm } from "@/components/search-form";
@@ -25,12 +26,16 @@ type Props = {
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar> & Props) {
   const { repos, activeRepoId, setActiveRepoId, account, ...rest } = props;
-  
+  const [searchKey, setSearchKey] = React.useState('');
+
+  const searchKeyTrim = searchKey.trim();
+  const filterRepos = searchKey.length == 0 ? repos : repos.filter((repo, index) => repo.name.includes(searchKeyTrim));
+
   return (
     <Sidebar {...rest}>
       <SidebarHeader>
         <AccountBar account={account} />
-        <SearchForm />
+        <SearchForm searchKey={searchKey} setSearchKey={setSearchKey} />
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
@@ -38,7 +43,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar> & Props) 
           <SidebarGroupLabel>Repository</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {repos.map((item) => (
+              {filterRepos.map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild isActive={item.id === activeRepoId} onClick={() => setActiveRepoId(item.id)}>
                     <a href={'#'}>{item.name}</a>
