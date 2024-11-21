@@ -11,11 +11,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 type Props = {
-  account: Account;
+  account?: Account;
 }
 
 export function AccountBar(props: Props) {
   const { account } = props;
+
+  if (account == null) {
+    return (<div></div>);
+  }
 
   return (
     <SidebarMenu>

@@ -21,7 +21,7 @@ type Props = {
   repos: Repo[];
   activeRepoId?: number;
   setActiveRepoId: (id: number) => void;
-  account: Account;
+  account?: Account;
 };
 
 export function AppSidebar(props: React.ComponentProps<typeof Sidebar> & Props) {
