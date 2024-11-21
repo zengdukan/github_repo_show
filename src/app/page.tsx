@@ -82,7 +82,7 @@ export default function Home() {
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Github repositories showcase</CardTitle>
-          <CardDescription>Repositories infomation fetch by Github Rest API. Because <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" className="underline">Github Rest API rate limit</a>, can select 'Mock' to see mock repositories</CardDescription>
+          <CardDescription>Repositories infomation fetch by Github Rest API. Because <a href="https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api" target="_blank" className="underline">Github Rest API rate limit</a>, can select &apos;Mock&apos; to see mock repositories</CardDescription>
         </CardHeader>
         <CardContent>
           <form>
