@@ -62,15 +62,15 @@ export default function Home() {
       const accountJson = await accountRsp.json();
       const reposJson = await reposRsp.json();
 
-      setAccount(accountJson);
-      setRepos(reposJson);
-      setMockOfContext(mock);
+      setAccount?.(accountJson);
+      setRepos?.(reposJson);
+      setMockOfContext?.(mock);
       router.push('/dashboard');
-    } catch (error) {
+    } catch (error: unknown) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: error.message || 'There was a problem with one or both fetch operations.',
+        description: (error as Error).message || 'There was a problem with one or both fetch operations.',
       })
     } finally {
       setLoading(false);
@@ -122,7 +122,7 @@ export default function Home() {
               </div>
               <div className="flex items-center space-y-1.5">
                 <Label htmlFor="mock" className="mr-1.5">Mock:</Label>
-                <Checkbox id="mock" className="mr-1.5" defaultChecked checked={mock} onCheckedChange={(value) => setMock(value)} />
+                <Checkbox id="mock" className="mr-1.5" defaultChecked checked={mock} onCheckedChange={(value) => setMock?.(value as boolean)} />
               </div>
             </div>
           </form>

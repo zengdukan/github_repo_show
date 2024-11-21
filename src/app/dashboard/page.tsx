@@ -31,13 +31,13 @@ function findRepoById(repos: Repo[], id: number | undefined) {
 }
 
 export default function Page() {
-  const {account, repos, mock} = useContext(GitContext) as {account: Account; repos: Repo[], mock: boolean} ;
-  const [activeRepoId, setActiveRepoId] = useState<number | undefined>(repos.length > 0 ? repos[0].id : undefined);
-  const activeRepo = useMemo(() => findRepoById(repos, activeRepoId), [activeRepoId, repos]);
+  const {account, repos, mock} = useContext(GitContext);// as {account: Account; repos: Repo[], mock: boolean} ;
+  const [activeRepoId, setActiveRepoId] = useState<number | undefined>(repos!.length > 0 ? repos![0].id : undefined);
+  const activeRepo = useMemo(() => findRepoById(repos!, activeRepoId), [activeRepoId, repos]);
 
   return (
     <SidebarProvider>
-      <AppSidebar repos={repos} activeRepoId={activeRepoId} setActiveRepoId={setActiveRepoId} account={account} />
+      <AppSidebar repos={repos!} activeRepoId={activeRepoId} setActiveRepoId={setActiveRepoId} account={account!} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />

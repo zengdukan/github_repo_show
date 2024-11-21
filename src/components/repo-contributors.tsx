@@ -64,7 +64,7 @@ type Props = {
   mock: string;
 }
 
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 export function RepoContributors(props: Props) {
   const { repo, mock } = props;

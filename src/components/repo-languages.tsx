@@ -21,7 +21,7 @@ type RepoLanguageObj = {
   fill: string;
 }
 
-const fetcher = url => fetch(url).then(r => r.json())
+const fetcher = (url: string) => fetch(url).then(r => r.json())
 
 export function RepoLanguages(props: Props) {
   const { repo, mock } = props;
